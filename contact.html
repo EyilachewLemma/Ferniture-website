@@ -219,12 +219,12 @@
                       type="text"
                       class="form-control address"
                       name="address"
-                      id="adress"
+                      id="address"
                       placeholder="Adress"
                     />
                   </div>
                   <div>
-                    <select name="service" class="form-control service">
+                    <select name="service" class="form-control service" id="service">
                       <option disabled="disabled" selected="">Services</option>
                       <option value="Building Architectural and Structural Design">Building Architectural and Structural Design </option>
                       <option value="Hydraulic and Structural Engineering Design">Hydraulic and Structural Engineering Design</option>
@@ -245,7 +245,7 @@
                     ></textarea>
                   </div>
                   <div class="submit-area">
-                    <button type="submit" class="theme-btn-s4">
+                    <button type="button" class="theme-btn-s4" id="submitBtn">
                       Get in Touch
                     </button>
                     <div id="loader">
@@ -437,27 +437,30 @@
     <!-- Custom script for this template -->
     <script src="assets/js/script.js"></script>
     <script type="text/javascript">
-      function sendEmail(e) {
-        e.preventDefault()
-        const form = document.querySelector('.contact-form')
-        name = document.querySelector('.name')
-        address = document.querySelector('.address') 
-        service = document.querySelector('.service')
-        message = document.querySelector('message')           
 
+        const btn = document.getElementById('submitBtn')
+                 
+       btn.addEventListener('click',function(){
+        const name = document.getElementById('name').value
+        const  email = document.getElementById('email').value
+        const address = document.getElementById('address').value
+        const service = document.getElementById('service').value
+       const  message = document.getElementById('note').value
+       const body = 'name: '+name+'<br /> email: '+email+'<br /> addres: '+address+'<br />service: '+service+'<br /> message: '+message
+       console.log('body=',body)
         Email.send({
-    SecureToken : "C973D7AD-F097-4B95-91F4-40ABC5567812",
-    To : 'them@website.com',
-    From : "you@isp.com",
-    Subject : "This is the subject",
-    Body : "And this is the body"
-}).then(
-  message => alert(message)
-);
-    
-}
-form.addEventListener('submit',sendEmail)
-    </script>
+          Host : "smtp.gmail.com",
+          Username : "lemaeyilachew@gmail.com",
+          Password : "aphmrmziagdrzfeo",
+          To : 'lemaeyilachew@gmail.com',
+          From : email,
+          Subject : "New Message",
+         Body : body
+       }).then(
+          message => alert(message)
+      );
+      })
+       </script>
     
   </body>
 </html>
