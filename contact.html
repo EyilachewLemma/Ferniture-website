@@ -248,17 +248,17 @@
                     <button type="button" class="theme-btn-s4" id="submitBtn">
                       Get in Touch
                     </button>
-                    <div id="loader">
+                    <!-- <div id="loader">
                       <i class="ti-reload"></i>
-                    </div>
-                  </div>
-                  <div class="clearfix error-handling-messages">
-                    <div id="success">Thank you</div>
-                    <!-- <div id="error">
-                      Error occurred while sending email. Please try again
-                      later.
                     </div> -->
                   </div>
+                  <!-- <div class="clearfix error-handling-messages">
+                    <div id="success">Thank you</div>
+                    <div id="error">
+                      Error occurred while sending email. Please try again
+                      later.
+                    </div> 
+                  </div> -->
                 </form>
               </div>
             </div>
@@ -426,6 +426,14 @@
 
     <!-- All JavaScript files
     ================================================== -->
+    <script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js">
+</script>
+<script type="text/javascript">
+   (function(){
+      emailjs.init("2Lhk25NjhGaim_Cg4");
+   })();
+</script>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/bootstrap.bundle.min.js"></script>
     <!-- Plugins for this template -->
@@ -441,25 +449,37 @@
         const btn = document.getElementById('submitBtn')
                  
        btn.addEventListener('click',function(){
-        const name = document.getElementById('name').value
-        const  email = document.getElementById('email').value
-        const address = document.getElementById('address').value
-        const service = document.getElementById('service').value
-       const  message = document.getElementById('note').value
-       const body = 'name: '+name+'<br /> email: '+email+'<br /> addres: '+address+'<br />service: '+service+'<br /> message: '+message
-       console.log('body=',body)
-        Email.send({
-          Host : "smtp.gmail.com",
-          Username : "lemaeyilachew@gmail.com",
-          Password : "aphmrmziagdrzfeo",
-          To : 'lemaeyilachew@gmail.com',
-          From : email,
-          Subject : "New Message",
-         Body : body
-       }).then(
-          message => alert(message)
-      );
+        const params = {
+          name: document.getElementById('name').value,
+        email:document.getElementById('email').value,
+        address:document.getElementById('address').value,
+        service:document.getElementById('service').value,
+       message:document.getElementById('note').value
+        }
+       const serviceID = "service_8h60psr"
+       const templateId = "template_e2g2kpj"
+       emailjs.send(serviceID,templateId,params)
+       .then(res=>{
+        document.getElementById('name').value =''
+        document.getElementById('email').value= ''
+        document.getElementById('address').value = ''
+        document.getElementById('service').value = ''
+       document.getElementById('note').value = ''
+       alert('Yor Message Sent successfully')
+       })
+        .catch(err=>{
+        alert('Faild to send your message')
       })
+       
+       })
+       // Email.send({
+        //   Host : "smtp.gmail.com",
+        //   Username : "lemaeyilachew@gmail.com",
+        //   Password : "aphmrmziagdrzfeo",
+        //   To : 'lemaeyilachew@gmail.com',
+        //   From : email,
+        //   Subject : "New Message",
+        //  Body : body
        </script>
     
   </body>
