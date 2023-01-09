@@ -34,6 +34,8 @@
     })
     });
 
+ 
+
     $(document).ready(function() {
         let owl = $("#owl-demo2");
         owl.owlCarousel({
